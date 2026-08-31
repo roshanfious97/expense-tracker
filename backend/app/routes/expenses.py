@@ -3,8 +3,7 @@ from sqlalchemy.orm import Session
 
 from ..database import get_db
 from ..models import Expense
-from ..schemas.expense import ExpenseCreate
-
+from ..schemas.expense import ExpenseCreate, ExpenseResponse
 
 router = APIRouter(
     prefix="/expenses",
@@ -12,12 +11,12 @@ router = APIRouter(
 )
 
 
-@router.get("/")
+@router.get("/", response_model=list[ExpenseResponse])
 def get_expenses(db: Session = Depends(get_db)):
     return db.query(Expense).all()
 
 
-@router.post("/")
+@router.post("/", response_model=ExpenseResponse)
 def create_expense(
     expense: ExpenseCreate,
     db: Session = Depends(get_db)
@@ -56,7 +55,7 @@ def get_expense(
     return expense
 
 
-@router.put("/{expense_id}")
+@router.put("/{expense_id}", response_model=ExpenseResponse)
 def update_expense(
     expense_id: int,
     expense_data: ExpenseCreate,

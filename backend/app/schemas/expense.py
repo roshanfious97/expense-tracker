@@ -8,3 +8,15 @@ class ExpenseCreate(BaseModel):
     description: str
     category: str
     date: date
+
+
+class ExpenseResponse(BaseModel):
+    id: int
+    amount: float
+    description: str
+    category: str
+    date: date
+
+    model_config = {
+        "from_attributes": True
+    }
