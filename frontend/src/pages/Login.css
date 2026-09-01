@@ -51,8 +51,8 @@
 
   border-radius: 16px;
 
-  background: #f0ebff;
-  color: #7657e8;
+  background: #E6F4F1;
+  color: #0F766E;
 }
 
 .login-icon svg {
@@ -102,7 +102,7 @@
   font-weight: 600;
 }
 .form-group input, .form-group select{
-    padding: 0 16px !important;
+    padding: 0 25px !important;
 }
 .input-wrapper {
   position: relative;
@@ -159,7 +159,7 @@
   border-color: #8b6bea;
 
   box-shadow:
-    0 0 0 3px rgba(139, 107, 234, 0.12);
+    0 0 0 3px rgba(15, 118, 110, 0.12);
 }
 
 /* Error */
@@ -187,7 +187,7 @@
   border: none;
   border-radius: 10px;
 
-  background: #7657e8;
+  background: #0F766E;
   color: white;
 
   font-size: 15px;
@@ -196,7 +196,7 @@
   cursor: pointer;
 
   box-shadow:
-    0 8px 18px rgba(118, 87, 232, 0.22);
+    0 8px 18px rgba(15, 118, 110, 0.22);
 
   transition:
     transform 0.15s ease,
@@ -205,10 +205,10 @@
 }
 
 .login-button:hover:not(:disabled) {
-  background: #6847dc;
+  background: #0D5F59;
 
   box-shadow:
-    0 10px 22px rgba(118, 87, 232, 0.28);
+    0 10px 22px rgba(15, 118, 110, 0.28);
 
   transform: translateY(-1px);
 }
@@ -274,7 +274,7 @@
   border: none;
 
   background: transparent;
-  color: #7657e8;
+  color: #0F766E;
 
   font: inherit;
   font-weight: 600;
