@@ -24,6 +24,7 @@ build/
 
 # React environment
 frontend/.env
+frontend/.env.*
 
 # IDE
 .vscode/

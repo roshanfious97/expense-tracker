@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
+from ..dependencies import get_current_user
 from sqlalchemy.orm import Session
 
 from ..database import get_db
-from ..models import Expense
+from ..models import Expense, User
 from ..schemas.expense import ExpenseCreate, ExpenseResponse
 
 router = APIRouter(
@@ -12,9 +13,13 @@ router = APIRouter(
 
 
 @router.get("/", response_model=list[ExpenseResponse])
-def get_expenses(db: Session = Depends(get_db)):
+def get_expenses(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
     return (
         db.query(Expense)
+        .filter(Expense.user_id == current_user.id)
         .order_by(Expense.date.desc(), Expense.id.desc())
         .all()
     )
@@ -23,14 +28,16 @@ def get_expenses(db: Session = Depends(get_db)):
 @router.post("/", response_model=ExpenseResponse)
 def create_expense(
     expense: ExpenseCreate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     new_expense = Expense(
-        amount=expense.amount,
-        description=expense.description,
-        category=expense.category,
-        date=expense.date
-    )
+    user_id=current_user.id,
+    amount=expense.amount,
+    description=expense.description,
+    category=expense.category,
+    date=expense.date,
+)
 
     db.add(new_expense)
     db.commit()
