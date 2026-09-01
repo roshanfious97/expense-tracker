@@ -13,7 +13,11 @@ router = APIRouter(
 
 @router.get("/", response_model=list[ExpenseResponse])
 def get_expenses(db: Session = Depends(get_db)):
-    return db.query(Expense).all()
+    return (
+        db.query(Expense)
+        .order_by(Expense.date.desc(), Expense.id.desc())
+        .all()
+    )
 
 
 @router.post("/", response_model=ExpenseResponse)
